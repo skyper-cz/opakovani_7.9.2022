@@ -103,15 +103,22 @@ public class Main {
         System.out.println(seznam.get(seznam.size() -1).getVek());
 
        for (int i = 0; i < seznam.size(); i++){
+
+           System.out.println("Ahoj1");
            JLabel docasny1 = new JLabel(seznam.get(i).getJmeno());
            vypisJmena[i] = docasny1;
+           vypisJmena[i].setBounds(10,100 + (50 * i),100,50);
            vypisJmena[i].setVisible(true);
+           System.out.println("Ahoj2");
 
+           System.out.println("Ahoj3");
            JLabel docasny2 = new JLabel(String.valueOf(seznam.get(i).getVek()));
            vypisVeku[i] = docasny2;
+           vypisVeku[i].setBounds(100,100 + (50 * i),100,50);
            vypisVeku[i].setVisible(true);
+           System.out.println("Ahoj4");
         }
-
+        System.out.println("Ahoj5");
         SwingUtilities.updateComponentTreeUI(fr);
 
     }
