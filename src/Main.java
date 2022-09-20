@@ -36,8 +36,8 @@ public class Main {
             vypisJmena[i].setBounds(0,100 + (50 * i),100,50);
             vypisJmena[i].setVisible(true);
 
-            JLabel zapis2 = new JLabel("TESt2");
-            vypisVeku[i] = zapis;
+            JLabel zapis2 = new JLabel("Test2");
+            vypisVeku[i] = zapis2;
             vypisVeku[i].setBounds(100,100 + (50 * i),100,50);
             vypisVeku[i].setVisible(true);
 
