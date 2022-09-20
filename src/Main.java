@@ -33,7 +33,7 @@ public class Main {
         for(int i = 0; i < vypisJmena.length - 1; i++){
             JLabel zapis = new JLabel("Test");
             vypisJmena[i] = zapis;
-            vypisJmena[i].setBounds(0,100 + (50 * i),100,50);
+            vypisJmena[i].setBounds(10,100 + (50 * i),100,50);
             vypisJmena[i].setVisible(true);
 
             JLabel zapis2 = new JLabel("Test2");
@@ -86,6 +86,8 @@ public class Main {
         hledat.addActionListener(Main::Filtrovat);
         hledat.setVisible(true);
         fr.add(hledat);
+
+        SwingUtilities.updateComponentTreeUI(fr);
     }
     public static void PridatOsobu(ActionEvent e){
         String jmeno = vlozeneJmeno.getText();
@@ -109,6 +111,9 @@ public class Main {
            vypisVeku[i] = docasny2;
            vypisVeku[i].setVisible(true);
         }
+
+        SwingUtilities.updateComponentTreeUI(fr);
+
     }
 
     public static void Filtrovat(ActionEvent e){
