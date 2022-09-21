@@ -8,33 +8,52 @@ import java.awt.event.ActionEvent;
 
 public class Operace {
 
-    JTable tabulka = new JTable(new DefaultTableModel(generatorLidí(8, 8), new String[]{"Jméno", "Věk"}));
-    JTextField imput = new JTextField();
+    JTable tabulka = new JTable(new DefaultTableModel(prvniRadek(), new String[]{"Jméno", "Věk"}));
+
+    String[] jmena = new String[10];
+    String[] vek = new String[10];
+    JTextField vlozeneJmeno = new JTextField();
+    JTextField vlozenyVek = new JTextField();
+    JTextField hledaneJmeno = new JTextField();
+    JTextField hledanyVek = new JTextField();
      JButton addRow = new JButton("Add a row");
     JButton filter = new JButton("Filtrovat");
     JFrame fr = new JFrame("Tabulka");
 
     public void operace() {
-        fr.setSize(600, 500);
+        fr.setBounds(100,200,600, 500);
         fr.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         fr.setLayout(null);
         fr.setResizable(false);
 
-        prepare(tabulka);
         tabulka.setBounds(1, 100, 582, 358);
         tabulka.setBorder(new LineBorder(new Color(0, 0, 0), 2));
         tabulka.setDefaultRenderer(Object.class, new Tucnost());
+        fr.add(tabulka);
 
-        prepare(imput);
-        imput.setBounds(50, 12, 440, 20);
+        vlozeneJmeno.setBounds(10, 10, 100, 50);
+        vlozeneJmeno.setVisible(true);
+        fr.add(vlozeneJmeno);
+
+        vlozenyVek.setBounds(10, 70, 100, 50);
+        vlozenyVek.setVisible(true);
+        fr.add(vlozenyVek);
+
+        hledaneJmeno.setBounds(120, 10, 100, 50);
+        hledaneJmeno.setVisible(true);
+        fr.add(hledaneJmeno);
+
+        hledanyVek.setBounds(120, 70, 100, 50);
+        hledanyVek.setVisible(true);
+        fr.add(hledanyVek);
 
         addRow.setBounds(300, 44, 175, 25);
         addRow.addActionListener(this::AddButton);
-        prepare(addRow);
+        fr.add(addRow);
 
         filter.setBounds(495, 12, 20, 20);
         filter.addActionListener(this::FilterButton);
-        prepare(filter);
+        fr.add(filter);
 
 
         fr.setVisible(true);
@@ -43,7 +62,7 @@ public class Operace {
             tabulka.clearSelection();
             for (int x = 0; x < tabulka.getColumnCount(); x++){
                 for (int y = 0; y < tabulka.getRowCount();y++){
-                    if (tabulka.getValueAt(y, x).equals(imput.getText())){
+                    if (tabulka.getValueAt(y, x).equals(hledaneJmeno.getText())){
                         tabulka.changeSelection(y, x, true, false);
                     }
                 }
@@ -53,42 +72,16 @@ public class Operace {
     }
     
     public void AddButton(ActionEvent e){
-        DefaultTableModel lordAndSaviorDefaultTableModel = (DefaultTableModel) tabulka.getModel();
-        lordAndSaviorDefaultTableModel.addRow(generatorLidí(8));
+        DefaultTableModel aktualizace = (DefaultTableModel) tabulka.getModel();
+        String jmeno = String.valueOf(vlozeneJmeno);
+        String vek = String.valueOf(vlozenyVek);
+        //aktualizace.addRow(jmeno, vek);
     }
 
-    public void prepare(JComponent o) {
-        o.setVisible(true);
-        fr.add(o);
-    }
-
-    String[][] generatorLidí(int wordSize, int arraySize) {
-        String[][] out = new String[arraySize][2];
+    String[][] prvniRadek() {
+        String[][] out = new String[1][1];
         out[0] = new String[]{"Jméno", "Věk"};
-
-        for (int i = 1; i < out.length; i++) {
-            StringBuilder borek = new StringBuilder();
-            borek.append((char) (Math.random() * (90 - 65) + 65));
-            for (int j = 0; j < wordSize; j++) {
-                borek.append((char) (Math.random() * (122 - 97) + 97));
-            }
-            out[i][1] = String.valueOf((int) (Math.random() * 120));
-            out[i][0] = borek.toString();
-        }
         return out;
     }
 
-    // Jenom na jeden entry
-    public Object[] generatorLidí(int wordSize) {
-        String[] out = new String[2];
-        StringBuilder borek = new StringBuilder();
-        borek.append((char) (Math.random() * (90 - 65) + 65));
-        for (int j = 0; j < wordSize; j++) {
-            borek.append((char) (Math.random() * (122 - 97) + 97));
-        }
-        out[1] = String.valueOf((int) (Math.random() * 120));
-        out[0] = borek.toString();
-
-        return out;
-    }
 }
